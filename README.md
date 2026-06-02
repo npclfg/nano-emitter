@@ -38,7 +38,7 @@ Trade-off: NanoEmitter is ~1.3–1.9x slower in microbenchmarks (`emit` has the 
 ## Installation
 
 ```bash
-npm install nano-emitter
+npm install @npclfg/nano-emitter
 ```
 
 **Requirements:** Node.js 16+ or modern browsers (ES2020)
@@ -48,7 +48,7 @@ npm install nano-emitter
 ### Basic Usage
 
 ```js
-import { NanoEmitter } from "nano-emitter";
+import { NanoEmitter } from "@npclfg/nano-emitter";
 
 const bus = new NanoEmitter();
 
@@ -67,7 +67,7 @@ off();
 ### CommonJS
 
 ```js
-const { NanoEmitter } = require("nano-emitter");
+const { NanoEmitter } = require("@npclfg/nano-emitter");
 ```
 
 ### With Priorities
@@ -189,7 +189,7 @@ bus.emit("update"); // Error: Emitter has been disposed
 NanoEmitter is fully typed. Define your event map for type-safe emit/subscribe:
 
 ```typescript
-import { NanoEmitter, EventMap } from "nano-emitter";
+import { NanoEmitter, EventMap } from "@npclfg/nano-emitter";
 
 // Define your events
 interface MyEvents extends EventMap {
@@ -225,7 +225,7 @@ import {
   EmitterOptions,     // { delimiter?: string }
   WaitForOptions,     // { timeout?, signal? }
   Unsubscribe,        // () => void
-} from "nano-emitter";
+} from "@npclfg/nano-emitter";
 ```
 
 ## API Reference
