@@ -1,4 +1,8 @@
-# NanoEmitter
+# nano-emitter
+
+[![npm version](https://img.shields.io/npm/v/@npclfg/nano-emitter)](https://npmjs.com/package/@npclfg/nano-emitter)
+[![npm downloads](https://img.shields.io/npm/dm/@npclfg/nano-emitter)](https://npmjs.com/package/@npclfg/nano-emitter)
+[![license](https://img.shields.io/npm/l/@npclfg/nano-emitter)](https://github.com/npclfg/nano-emitter/blob/main/LICENSE)
 
 A tiny event emitter with priorities, pattern matching, and async support.
 
@@ -6,6 +10,30 @@ A tiny event emitter with priorities, pattern matching, and async support.
 - **TypeScript-first** with full type inference
 - **~420 lines** of code
 - **ESM and CommonJS** support
+
+## The Problem
+
+You reach for Node's `EventEmitter` but:
+
+```typescript
+// EventEmitter: removeListener() needs the original function reference
+// EventEmitter: listeners run in insertion order only — no priorities
+// EventEmitter: emit() ignores promises, so async handlers race
+// EventEmitter: no wildcards — can't listen to "task:*"
+```
+
+## The Fix
+
+```typescript
+import { NanoEmitter } from "@npclfg/nano-emitter";
+
+const bus = new NanoEmitter();
+
+const off = bus.on("user:login", (user) => console.log(user.name)); // returns unsubscribe
+bus.onPattern("task:*", (event, data) => audit(event, data));       // wildcards
+await bus.emitAsync("user:login", { name: "Alice" });               // awaits handlers in order
+off();
+```
 
 ## Why NanoEmitter?
 
